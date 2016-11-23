@@ -32,7 +32,7 @@
 		<property name="target_url" column="target_url"/>
 	</class>
 	
-	
+	<!-- 吸睛发现 -->
 	<class name="RecommandsDiscovery" table="recommands_discovery">
 		<id name="rdid" column="rdid" type="java.lang.Long">
 			<generator class="increment" />
@@ -40,4 +40,34 @@
 		<property name="did" column="did" type="java.lang.Long"/>
 	</class>
     
+	<!-- 发现 -->
+    <class name="Discovery" table="discovery">
+		<id name="did" column="did" type="java.lang.Long">
+			<generator class="increment" />
+		</id>
+		<property name="title" column="title"/>
+		<property name="thumb_url" column="thumb_url"/>
+		<property name="viewed" column="viewed" type="java.lang.Long"/>
+		<property name="detail_url" column="detail_url"/>
+	</class>
+	
+	<!-- 潮流搭配 -->
+    <class name="RecommandsMatch" table="recommands_match">
+		<id name="rmid" column="rmid" type="java.lang.Long">
+			<generator class="increment" />
+		</id>
+		<property name="mid" column="mid" type="java.lang.Long"/>
+	</class>
+	
+	<!-- 潮流搭配 -->
+    <class name="Match" table="male_match">
+		<id name="mid" column="mid" type="java.lang.Long">
+			<generator class="increment" />
+		</id>
+		<property name="type" column="type" type="java.lang.Long"/>
+		<property name="thumb_url" column="thumb_url"/>
+		<property name="title" column="title"/>
+		<property name="description" column="description"/>
+	</class>
+	
 </hibernate-mapping>

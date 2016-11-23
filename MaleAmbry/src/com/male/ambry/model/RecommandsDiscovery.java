@@ -16,5 +16,4 @@ public class RecommandsDiscovery {
 	public void setDid(long did) {
 		this.did = did;
 	}
-	
 }

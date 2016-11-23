@@ -8,7 +8,7 @@
 
 2. 获取首页吸睛发现信息
 --->主机名/recommand_discovery
-返回数据：{"status_code":1000,"results":[{"rdid":1,"did":12},{"rdid":2,"did":19}]}
+返回数据：{"status_code":1000,"results":[{"did":1,"title":"穿衣不对，怎么撩妹？","thumb_url":"http://nanyiku-v200.oss-cn-shenzhen.aliyuncs.com/product/16110314222201400258.jpg","viewed":40552,"detail_url":"http://console.nanyiku.net/app/schoolDetail.do?id\u003d930\u0026flag\u003dshare"},{"did":1,"title":"穿衣不对，怎么撩妹？","thumb_url":"http://nanyiku-v200.oss-cn-shenzhen.aliyuncs.com/product/16110314222201400258.jpg","viewed":40552,"detail_url":"http://console.nanyiku.net/app/schoolDetail.do?id\u003d930\u0026flag\u003dshare"}]}
 
 3. 获取首页潮流搭配信息
 --->主机名/recommand_match
