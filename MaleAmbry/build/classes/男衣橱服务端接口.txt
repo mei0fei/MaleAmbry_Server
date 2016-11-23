@@ -1,0 +1,56 @@
+主机名：http://localhost:8080/MaleAmbry
+
+接口说明：
+1. 获取首页banner信息
+注：固定为五个banner
+--->主机名/banner
+返回数据：{"status_code":1000,"results":[{"id":1,"thumbnail":"banner1.png","target_url":"https://detail.tmall.com/item.htm?id\u003d539102502078"},{"id":2,"thumbnail":"banner2.png","target_url":"http://detail.tmall.com/item.htm?id\u003d531627522061"},{"id":3,"thumbnail":"banner3.png","target_url":"https://item.taobao.com/item.htm?ft\u003dt\u0026id\u003d526355007065"},{"id":4,"thumbnail":"banner4.png","target_url":"https://detail.tmall.com/item.htm?id\u003d540739166938"},{"id":5,"thumbnail":"banner5.png","target_url":"https://detail.tmall.com/item.htm?id\u003d539525863293"}]}
+
+2. 获取首页吸睛发现信息
+--->主机名/recommand_discovery
+返回数据：{"status_code":1000,"results":[{"rdid":1,"did":12},{"rdid":2,"did":19}]}
+
+3. 获取首页潮流搭配信息
+--->主机名/recommand_match
+
+3. 获取首页今日精选第n页信息
+注：最多3页，即0-2.
+如：获取首页今日精选第2页信息
+--->主机名/recommand_single?page=2
+
+4. 获取某种风格编号第n页单品信息
+如：上衣夹克风格编号为101，获取风格编号为101第2页单品信息
+--->主机名/single?style=101&page=2
+
+5. 获取某种风格编号第n页搭配信息
+如：休闲风格风格编号为1，获取风格编号为1第3页搭配信息
+--->主机名/match?style=1&page=3
+
+6. 获取第n页发现信息
+如：获取第1页发现信息
+--->主机名/discovery?page=1
+
+7. 登录
+注：采用post方式,如果app_token=MaleAmbry即为该用户在该客户端上首次登录，否则为32位服务器回传的app_token值
+--->主机名/login
+--->post参数1：username=?
+--->post参数2：password=?
+--->post参数3：app_token=?
+
+8. 注册
+注：采用post方式
+--->主机名/register
+--->post参数1：username=?
+--->post参数2：password=?
+
+9. 退出当前账户
+注：采用post方式,app_token为32位服务器回传的app_token值
+--->主机名/login
+--->post参数1：app_token=?
+
+10. 修改账户密码
+注：采用post方式,app_token为32位服务器回传的app_token值
+--->主机名/modify_password
+--->post参数1：app_token=?
+--->post参数2：old_psd=?
+--->post参数3：new_psd=?

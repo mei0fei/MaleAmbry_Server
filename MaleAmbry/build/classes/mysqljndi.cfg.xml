@@ -46,7 +46,7 @@
         <property name="hbm2ddl.auto">update</property> -->
 
 		<property name="hbm2ddl.auto">validate</property>
-        <mapping resource="com/male/ambry/model/Goods.hbm.xml"/>
+        <mapping resource="com/male/ambry/model/MaleAmbry.hbm.xml"/>
 
     </session-factory>
 

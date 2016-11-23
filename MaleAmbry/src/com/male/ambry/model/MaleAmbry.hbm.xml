@@ -22,5 +22,22 @@
 		<property name="address" column="address"/>
 
 	</class>
+	
+	<!-- banner -->
+	<class name="Banner" table="banner">
+		<id name="id" column="bid" type="java.lang.Long">
+			<generator class="increment" />
+		</id>
+		<property name="thumbnail" column="thumbnail"/>
+		<property name="target_url" column="target_url"/>
+	</class>
+	
+	
+	<class name="RecommandsDiscovery" table="recommands_discovery">
+		<id name="rdid" column="rdid" type="java.lang.Long">
+			<generator class="increment" />
+		</id>
+		<property name="did" column="did" type="java.lang.Long"/>
+	</class>
     
 </hibernate-mapping>
