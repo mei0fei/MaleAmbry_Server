@@ -69,7 +69,8 @@ public class DiscoveryAction extends ActionSupport{
 			bannerResponse.setStatus_code(1000);
 			List<Discovery> discoveryList = new ArrayList<>();
 			for(int index = 0; index < recommandDiscoveryList.size(); index++) {
-				Discovery discovery = (Discovery) DBManager.getInstance().from("from Discovery").select().get(0);
+				RecommandsDiscovery recommandsDiscovery = recommandDiscoveryList.get(index);
+				Discovery discovery = (Discovery) DBManager.getInstance().from("from Discovery").where("did = ?").addArguments(recommandsDiscovery.getDid()).select().get(0);
 				discoveryList.add(discovery);
 			}
 			bannerResponse.setResults(discoveryList);
