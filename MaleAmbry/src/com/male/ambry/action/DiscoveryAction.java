@@ -12,7 +12,6 @@ import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 
 import com.google.gson.Gson;
-import com.male.ambry.model.Banner;
 import com.male.ambry.model.Discovery;
 import com.male.ambry.model.RecommandsDiscovery;
 import com.male.ambry.model.Response;
@@ -23,6 +22,7 @@ import com.opensymphony.xwork2.ActionSupport;
 public class DiscoveryAction extends ActionSupport{
 	
 	private String result;
+	private int page;
 
 	public String getResult() {
 		return result;
@@ -32,10 +32,18 @@ public class DiscoveryAction extends ActionSupport{
 		this.result = result;
 	}
 
+	public int getPage() {
+		return page;
+	}
+
+	public void setPage(int page) {
+		this.page = page;
+	}
+
 	@Override
 	@Action(value="discovery", results={@Result(name="success", type="json", params={"root", "result"})})
 	public String execute() throws Exception {
-		List<Discovery> discoveryList = DBManager.getInstance().from("from Discovery").select();
+		List<Discovery> discoveryList = DBManager.getInstance().from("from Discovery").limit(page, 8).select();
 		
 		Response<Discovery> bannerResponse = new Response<>();
 		if(discoveryList != null && discoveryList.size() > 0) {
