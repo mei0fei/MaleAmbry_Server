@@ -1,10 +1,7 @@
 package com.male.ambry.action;
 
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
@@ -15,6 +12,7 @@ import com.google.gson.Gson;
 import com.male.ambry.model.Banner;
 import com.male.ambry.model.Response;
 import com.male.ambry.utils.DBManager;
+import com.male.ambry.utils.ResponseUtil;
 import com.opensymphony.xwork2.ActionSupport;
 
 @ParentPackage("json")
@@ -52,13 +50,7 @@ public class BannerAction extends ActionSupport{
 		Gson gson  =  new Gson();  
         result = gson.toJson(bannerResponse);  
           
-        HttpServletResponse response = ServletActionContext.getResponse();  
-        response.setContentType("application/json;charset=utf-8");  
-        response.setHeader("caChe-Control", "no-cache");  
-        PrintWriter out =response.getWriter();  
-        out.print(result);  
-        out.flush();  
-        out.close();
+        ResponseUtil.outputResponse(ServletActionContext.getResponse(), result);
         
 		return SUCCESS;
 	}

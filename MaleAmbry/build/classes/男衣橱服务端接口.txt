@@ -25,6 +25,7 @@
 5. 获取某种风格编号第n页搭配信息
 如：休闲风格风格编号为1，获取风格编号为1第3页搭配信息
 --->主机名/match?style=1&page=3
+返回数据：{"status_code":1000,"results":[{"mid":20,"type":2,"thumb_url":"http://nanyiku-v200.oss-cn-shenzhen.aliyuncs.com/product/16102016301201605206.jpg","title":"商务西装搭配","description":"西装+西裤+皮鞋"},{"mid":21,"type":2,"thumb_url":"http://nanyiku-v200.oss-cn-shenzhen.aliyuncs.com/product/16101916155501604924.jpg","title":"西装外套日常穿搭","description":"西装外套+衬衫+休闲裤"}]}
 
 6. 获取第n页发现信息
 如：获取第1页发现信息
@@ -32,11 +33,12 @@
 返回数据：{"status_code":1000,"results":[{"did":16,"title":"必买清单|我们都离不开万能小白鞋","thumb_url":"https://gd1.alicdn.com/bao/uploaded/i1/860201681/TB2uCrwnXXXXXXDXXXXXXXXXXXX_!!860201681.jpg","viewed":44066,"detail_url":"http://console.nanyiku.net/app/schoolDetail.do?id\u003d911\u0026flag\u003dshare"},{"did":17,"title":"私人搭配师|据说，能hold住大衣的男人就有未来","thumb_url":"http://nanyiku-v200.oss-cn-shenzhen.aliyuncs.com/product/16101917492001705008.jpg","viewed":99235,"detail_url":"http://console.nanyiku.net/app/schoolDetail.do?id\u003d910\u0026flag\u003dshare"}]}
 
 7. 登录
-注：采用post方式,如果app_token=MaleAmbry即为该用户在该客户端上首次登录，否则为32位服务器回传的app_token值
+注：采用post方式,如果app_token=MaleAmbry即为该用户在该客户端上首次登录，否则为32位服务器回传的app_token值,所有参数均为加密过的
 --->主机名/login
---->post参数1：username=?
---->post参数2：password=?
---->post参数3：app_token=?
+--->post参数1：app_token=?
+--->post参数2：username=?
+--->post参数3：password=?
+--->post参数4：phone=?
 
 8. 注册
 注：采用post方式

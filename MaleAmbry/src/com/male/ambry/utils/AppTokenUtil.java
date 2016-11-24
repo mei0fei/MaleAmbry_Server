@@ -18,7 +18,7 @@ import com.male.ambry.model.AppToken;
  */
 public class AppTokenUtil {
 	
-	private final static String YAN = "[toast]MD5";
+	private final static String YAN = "[toast]MD5[male_ambry]";
 	
 	public final static AppToken generateAppToken(String username, String password) {
 		AppToken token = new AppToken();
@@ -26,7 +26,7 @@ public class AppTokenUtil {
 		md5 = MD5Util.MD5(md5 + md5.substring(md5.length() - 4));
 		token.setAppToken(md5);
 		
-		saveAppToken(token);
+//		saveAppToken(token);
 		return token;
 	}
 

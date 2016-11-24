@@ -7,6 +7,17 @@
 <title>Insert title here</title>
 </head>
 <body>
-hahahahh
+
+<form action="posttest" method=get>
+	<input type="text" name="username"><br>
+	<input type="text" name="psd"><br>
+	<input type="submit"><br>
+</form>
+
+<form action="posttest" method="post">
+	<input type="text" name="username"><br>
+	<input type="text" name="psd"><br>
+	<input type="submit"><br>
+</form>
 </body>
 </html>

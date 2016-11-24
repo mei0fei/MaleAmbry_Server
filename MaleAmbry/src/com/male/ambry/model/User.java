@@ -1,85 +1,55 @@
 package com.male.ambry.model;
 
-import java.util.Date;
-
 public class User {
-	private long id;
-	private String name;
-	private int age;
+
+	private long uid;
+	private String nick_name;
+	private String login_name;
 	private String password;
-	private String nickname;
-	private String sex;
-	private Date birthday;
-	private String address;
-
-	public long getId() {
-		return id;
+	private String app_token;
+	private long timestamp;
+	private String phone;
+	public long getUid() {
+		return uid;
 	}
-
-	public void setId(long id) {
-		this.id = id;
+	public void setUid(long uid) {
+		this.uid = uid;
 	}
-
-	public String getName() {
-		return name;
+	public String getNick_name() {
+		return nick_name;
 	}
-
-	public void setName(String name) {
-		this.name = name;
+	public void setNick_name(String nick_name) {
+		this.nick_name = nick_name;
 	}
-
-	public int getAge() {
-		return age;
+	public String getLogin_name() {
+		return login_name;
 	}
-
-	public void setAge(int age) {
-		this.age = age;
+	public void setLogin_name(String login_name) {
+		this.login_name = login_name;
 	}
-
 	public String getPassword() {
 		return password;
 	}
-
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
-	public String getNickname() {
-		return nickname;
+	public String getApp_token() {
+		return app_token;
 	}
-
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
+	public void setApp_token(String app_token) {
+		this.app_token = app_token;
 	}
-
-	public String getSex() {
-		return sex;
+	public long getTimestamp() {
+		return timestamp;
 	}
-
-	public void setSex(String sex) {
-		this.sex = sex;
+	public void setTimestamp(long timestamp) {
+		this.timestamp = timestamp;
 	}
-
-	public Date getBirthday() {
-		return birthday;
+	public String getPhone() {
+		return phone;
 	}
-
-	public void setBirthday(Date birthday) {
-		this.birthday = birthday;
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", age=" + age + ", password=" + password + ", nickname="
-				+ nickname + ", sex=" + sex + ", discount_end_date=" + birthday + ", address=" + address + "]";
-	}
-
+	
 }

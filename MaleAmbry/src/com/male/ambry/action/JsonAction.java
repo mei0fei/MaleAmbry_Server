@@ -16,15 +16,16 @@ import org.apache.struts2.convention.annotation.Result;
 import com.opensymphony.xwork2.ActionSupport;
 import com.google.gson.Gson;
 import com.male.ambry.model.Banner;
-import com.male.ambry.model.User;
+import com.male.ambry.model.TestUser;
 import com.male.ambry.utils.DBManager;
+import com.male.ambry.utils.ResponseUtil;
 
 @ParentPackage("json")
 public class JsonAction extends ActionSupport{
 	private static final long serialVersionUID = 1L;
 	private String Goods_Id;
 	private Map<String, Object> msg;
-	private User user;
+	private TestUser user;
 	
 	
 
@@ -43,7 +44,7 @@ public class JsonAction extends ActionSupport{
 	@Action(value = "/jsonAction", results = {
 			@Result(name = "success", type = "json", params={"root", "msg", "noCache", "true"}) })
 	public String execute() throws Exception {
-		user = (User) DBManager.getInstance().from("from User").where("_id = ?").addArguments(1)
+		user = (TestUser) DBManager.getInstance().from("from User").where("_id = ?").addArguments(1)
 				.select().get(0);
 		List list = new ArrayList();
 		list.add(user);
@@ -56,7 +57,7 @@ public class JsonAction extends ActionSupport{
 	@Action(value = "/test", results = {
 			@Result(name = "success", type = "json", params={"root", "msg", "noCache", "true"}) })
 	public String test() throws Exception {
-		user = (User) DBManager.getInstance().from("from User").where("_id = ?").addArguments(2)
+		user = (TestUser) DBManager.getInstance().from("from User").where("_id = ?").addArguments(2)
 				.select().get(0);
 		List list = new ArrayList();
 		list.add(user);
@@ -158,5 +159,44 @@ public class JsonAction extends ActionSupport{
          System.out.println(result);  
            
         return SUCCESS;
+	}
+	
+	private String username;
+	private String psd;
+	
+	
+	public String getUsername() {
+		return username;
+	}
+
+
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+
+
+	public String getPsd() {
+		return psd;
+	}
+
+
+
+	public void setPsd(String psd) {
+		this.psd = psd;
+	}
+
+	@Action(value="posttest", results={@Result(name="success", type="json", params={"root", "result"})})
+	public String postTest() throws Exception {
+		String method = ServletActionContext.getRequest().getMethod();
+		System.out.println(method);
+		if(method.equals("POST")) {
+			result = "user--->" + username + "  psd----->" +psd;
+		} else {
+			result = "get";
+		}
+		ResponseUtil.outputResponse(ServletActionContext.getResponse(), result);
+		return SUCCESS;
 	}
 }

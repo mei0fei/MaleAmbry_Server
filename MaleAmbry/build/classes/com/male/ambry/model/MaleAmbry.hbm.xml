@@ -9,7 +9,7 @@
 
 <hibernate-mapping package="com.male.ambry.model">
 
-	<class name="User" table="user">
+	<class name="TestUser" table="user">
 		<id name="id" column="_id" type="java.lang.Long">
 			<generator class="increment" />
 		</id>
@@ -21,6 +21,20 @@
 		<property name="birthday" column="birthday"/>
 		<property name="address" column="address"/>
 
+	</class>
+	
+	<!-- 用户信息 -->
+	<class name="User" table="users">
+		<id name="uid" column="uid" type="java.lang.Long">
+			<generator class="increment" />
+		</id>
+		<property name="nick_name" column="nick_name"/>
+		<property name="avatar_url" column="avatar_url"/>
+		<property name="login_name" column="login_name"/>
+		<property name="password" column="password"/>
+		<property name="app_token" column="app_token"/>
+		<property name="timestamp" column="timestamp" type="java.lang.Long"/>
+		<property name="phone" column="phone"/>
 	</class>
 	
 	<!-- banner -->
@@ -59,7 +73,7 @@
 		<property name="mid" column="mid" type="java.lang.Long"/>
 	</class>
 	
-	<!-- 潮流搭配 -->
+	<!-- 搭配 -->
     <class name="Match" table="male_match">
 		<id name="mid" column="mid" type="java.lang.Long">
 			<generator class="increment" />
@@ -70,4 +84,25 @@
 		<property name="description" column="description"/>
 	</class>
 	
+	<!-- 今日精选 -->
+    <class name="RecommandsSingle" table="recommands_single_product">
+		<id name="rsid" column="rsid" type="java.lang.Long">
+			<generator class="increment" />
+		</id>
+		<property name="sid" column="sid" type="java.lang.Long"/>
+	</class>
+	
+	<!-- 单品 -->
+    <class name="Single" table="single_product">
+		<id name="sid" column="sid" type="java.lang.Long">
+			<generator class="increment" />
+		</id>
+		<property name="type" column="type" type="java.lang.Long"/>
+		<property name="thumb_url" column="thumb_url"/>
+		<property name="title" column="title"/>
+		<property name="price" column="price"/>
+		<property name="favorite_count" column="favorite_count" type="java.lang.Long"/>
+		<property name="target_url" column="target_url"/>
+		<property name="shop_url" column="shop_url"/>
+	</class>
 </hibernate-mapping>
