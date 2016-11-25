@@ -1,6 +1,5 @@
 package com.male.ambry.utils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.male.ambry.MaleAmbryApp;
@@ -22,7 +21,7 @@ public class AppTokenUtil {
 	
 	public final static AppToken generateAppToken(String username, String password) {
 		AppToken token = new AppToken();
-		String md5 = MD5Util.MD5(token.getmTimestamp() + YAN + username + password);
+		String md5 = MD5Util.MD5(token.getTimestamp() + YAN + username + password);
 		md5 = MD5Util.MD5(md5 + md5.substring(md5.length() - 4));
 		token.setAppToken(md5);
 		

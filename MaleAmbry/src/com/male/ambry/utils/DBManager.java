@@ -192,6 +192,21 @@ public class DBManager<T> {
 		return updateOrDelete(t, false);
 	}
 	
+	public boolean update(T t) {
+		boolean result;
+		try {
+			startSession();
+			mSession.update(t);
+		} catch (Exception e) {
+			e.printStackTrace();
+			result = false;
+		} finally {
+			endSession();
+			result = true;
+		}
+		return result;
+	}
+	
 	/**
 	 * 执行更新、插入或者删除
 	 * @param t

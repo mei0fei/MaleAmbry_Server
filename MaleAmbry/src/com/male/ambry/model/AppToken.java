@@ -27,11 +27,11 @@ public class AppToken {
 		this.appToken = appToken;
 	}
 
-	public long getmTimestamp() {
+	public long getTimestamp() {
 		return timestamp;
 	}
 
-	public void setmTimestamp(long timestamp) {
+	public void setTimestamp(long timestamp) {
 		this.timestamp = timestamp;
 	}
 

@@ -36,15 +36,15 @@
 注：采用post方式,如果app_token=MaleAmbry即为该用户在该客户端上首次登录，否则为32位服务器回传的app_token值,所有参数均为加密过的
 --->主机名/login
 --->post参数1：app_token=?
---->post参数2：username=?
+--->post参数2：login_name=?
 --->post参数3：password=?
---->post参数4：phone=?
 
 8. 注册
 注：采用post方式
 --->主机名/register
---->post参数1：username=?
+--->post参数1：login_name=?
 --->post参数2：password=?
+--->post参数3：phone=?
 
 9. 退出当前账户
 注：采用post方式,app_token为32位服务器回传的app_token值
@@ -57,3 +57,4 @@
 --->post参数1：app_token=?
 --->post参数2：old_psd=?
 --->post参数3：new_psd=?
+--->post参数4：phone=?

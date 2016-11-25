@@ -19,4 +19,30 @@ public class TextUtil {
 		}
 		return true;
 	}
+	
+	/**
+	 * 判断字符串是否相等
+	 * @param username
+	 * @param db_username
+	 * @param password
+	 * @param db_password
+	 * @param phone
+	 * @param db_phone
+	 * @return
+	 */
+	public static boolean equalsToOthers(String username, String db_username, String password, String db_password, String phone, String db_phone) {
+		if(username.equals(db_username) && password.equals(db_password) && phone.equals(db_phone)) {
+			return true;
+		}
+		return false;
+	}
+	
+	/**
+	 * 隐藏手机号码中间字段
+	 * @param hideStr
+	 * @return
+	 */
+	public static String hidePhoneField(String hideStr) {
+		return hideStr.substring(0,3) + "****" + hideStr.substring(7);
+	}
 }
