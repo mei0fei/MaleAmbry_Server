@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50548
 File Encoding         : 65001
 
-Date: 2016-11-24 16:51:37
+Date: 2016-11-25 15:44:53
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -1672,9 +1672,11 @@ CREATE TABLE `users` (
   `timestamp` bigint(11) NOT NULL,
   `phone` varchar(11) COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`uid`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
 -- Records of users
 -- ----------------------------
 INSERT INTO `users` VALUES ('1', 'yinhua', null, 'yinhua', '123456', 'apptoken', '10000', '18859682725');
+INSERT INTO `users` VALUES ('2', 'weiqin', null, 'weiqin', '123456', '5cf93a428bb4edefebe1295c48ad0a2f', '1480043556398', '18859672725');
+INSERT INTO `users` VALUES ('3', '188****5678', null, 'yimeng', '11111', 'e9231c5a6341d987b117837ff2913610', '1480057176966', '18812345678');
