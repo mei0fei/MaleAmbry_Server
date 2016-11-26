@@ -58,5 +58,11 @@ public class Single {
 	public void setShop_url(String shop_url) {
 		this.shop_url = shop_url;
 	}
+	@Override
+	public String toString() {
+		return "Single [sid=" + sid + ", type=" + type + ", title=" + title
+				+ "]";
+	}
+	
 	
 }

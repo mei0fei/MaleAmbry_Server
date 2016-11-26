@@ -105,4 +105,50 @@
 		<property name="target_url" column="target_url"/>
 		<property name="shop_url" column="shop_url"/>
 	</class>
+	
+	<!-- 单品收藏 -->
+    <class name="FavoriteSingle" table="favorites_single_product">
+		<id name="fsid" column="fsid" type="java.lang.Long">
+			<generator class="increment" />
+		</id>
+		<property name="sid" column="sid" type="java.lang.Long"/>
+		<property name="uid" column="uid" type="java.lang.Long"/>
+	</class>
+	
+	<!-- 搭配收藏 -->
+    <class name="FavoriteMatch" table="favorites_match">
+		<id name="fmid" column="fmid" type="java.lang.Long">
+			<generator class="increment" />
+		</id>
+		<property name="mid" column="mid" type="java.lang.Long"/>
+		<property name="uid" column="uid" type="java.lang.Long"/>
+	</class>
+	
+	<!-- 发现收藏 -->
+    <class name="FavoriteDiscovery" table="favorites_discovery">
+		<id name="fdid" column="fdid" type="java.lang.Long">
+			<generator class="increment" />
+		</id>
+		<property name="did" column="did" type="java.lang.Long"/>
+		<property name="uid" column="uid" type="java.lang.Long"/>
+	</class>
+	
+	<!-- 单品图片 -->
+    <class name="ThumbsSingle" table="thumbs_single_product">
+		<id name="tsid" column="tsid" type="java.lang.Long">
+			<generator class="increment" />
+		</id>
+		<property name="sid" column="sid" type="java.lang.Long"/>
+		<property name="thumbnail" column="thumbnail"/>
+	</class>
+	
+	<!-- 搭配图片 -->
+    <class name="ThumbsMatch" table="thumbs_match">
+		<id name="tmid" column="tmid" type="java.lang.Long">
+			<generator class="increment" />
+		</id>
+		<property name="mid" column="mid" type="java.lang.Long"/>
+		<property name="thumbnail" column="thumbnail"/>
+		<property name="thumb_url" column="thumb_url"/>
+	</class>
 </hibernate-mapping>
