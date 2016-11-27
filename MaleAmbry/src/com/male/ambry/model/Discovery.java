@@ -46,5 +46,4 @@ public class Discovery {
 		this.detail_url = detail_url;
 	}
 	
-	
 }

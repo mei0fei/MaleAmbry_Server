@@ -37,7 +37,7 @@ public class BannerAction extends ActionSupport{
 	public String execute() throws Exception {
 		List<Banner> bannerList = DBManager.getInstance().from("from Banner").select();
 		
-		Response<Banner> bannerResponse = new Response<>();
+		Response<List<Banner>> bannerResponse = new Response<>();
 		if(bannerList != null && bannerList.size() > 0) {
 			bannerResponse.setStatus_code(1000);
 			bannerResponse.setResults(bannerList);

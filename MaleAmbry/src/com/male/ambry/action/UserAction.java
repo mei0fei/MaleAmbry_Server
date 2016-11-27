@@ -92,7 +92,7 @@ public class UserAction extends ActionSupport {
 	public String login() throws Exception {
 		String method = ServletActionContext.getRequest().getMethod();
 
-		Response<User> userResponse = new Response<>();
+		Response<List<User>> userResponse = new Response<>();
 		userResponse.setStatus_code(StatusCode.SUCCESS.ordinal());
 
 		if (method.equals("POST") && !TextUtil.isEmpty(app_token) && !TextUtil.isEmpty(login_name) && !TextUtil.isEmpty(password)) {
@@ -135,7 +135,7 @@ public class UserAction extends ActionSupport {
 	public String register() throws Exception {
 		String method = ServletActionContext.getRequest().getMethod();
 
-		Response<User> userResponse = new Response<>();
+		Response<List<User>> userResponse = new Response<>();
 		userResponse.setStatus_code(StatusCode.SUCCESS.ordinal());
 
 		if (method.equals("POST") && !TextUtil.isEmpty(login_name) && !TextUtil.isEmpty(password)
@@ -168,7 +168,7 @@ public class UserAction extends ActionSupport {
 	public String quitAccount() throws Exception {
 		String method = ServletActionContext.getRequest().getMethod();
 
-		Response<User> userResponse = new Response<>();
+		Response<List<User>> userResponse = new Response<>();
 		userResponse.setStatus_code(StatusCode.SUCCESS.ordinal());
 
 		if (method.equals("POST") && !TextUtil.isEmpty(app_token)) {
@@ -195,7 +195,7 @@ public class UserAction extends ActionSupport {
 	public String modifyPassword() throws Exception {
 		String method = ServletActionContext.getRequest().getMethod();
 
-		Response<User> userResponse = new Response<>();
+		Response<List<User>> userResponse = new Response<>();
 		userResponse.setStatus_code(StatusCode.SUCCESS.getStatus_code());
 
 		if (method.equals("POST") && !TextUtil.isEmpty(app_token)  && !TextUtil.isEmpty(old_psd) && !TextUtil.isEmpty(new_psd) && !TextUtil.isEmpty(phone)) {

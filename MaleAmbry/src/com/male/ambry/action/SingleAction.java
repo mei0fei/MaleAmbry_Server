@@ -51,7 +51,7 @@ public class SingleAction extends ActionSupport {
 	public String execute() throws Exception {
 		List<Single> singleList = DBManager.getInstance().from("from Single").where("type = ?").addArguments(style).limit(page, 8).select();
 		
-		Response<Single> singleResponse = new Response<>();
+		Response<List<Single>> singleResponse = new Response<>();
 		if(singleList != null && singleList.size() > 0) {
 			singleResponse.setStatus_code(1000);
 			singleResponse.setResults(singleList);
@@ -70,9 +70,9 @@ public class SingleAction extends ActionSupport {
 	
 	@Action(value="recommand_single", results={@Result(name="success", type="json", params={"root", "result"})})
 	public String recommandsMatch() throws Exception {
-		List<RecommandsSingle> recommandSingleList = DBManager.getInstance().from("from RecommandsSingle").limit(page, 8).select();
+		List<RecommandsSingle> recommandSingleList = DBManager.getInstance().from("from RecommandsSingle").select();
 		
-		Response<Single> singleResponse = new Response<>();
+		Response<List<Single>> singleResponse = new Response<>();
 		if(recommandSingleList != null && recommandSingleList.size() > 0) {
 			singleResponse.setStatus_code(1000);
 			List<Single> singleList = new ArrayList<>();

@@ -59,7 +59,7 @@ public class FavoriteAction extends ActionSupport {
 
 	@Action(value = "favo_single", results = { @Result(name = "success", type = "json", params = { "root", "result" }) })
 	public String getFavoSingle() throws Exception {
-		Response<Single> singleResponse = new Response<>();
+		Response<List<Single>> singleResponse = new Response<>();
 		singleResponse.setStatus_code(StatusCode.SUCCESS.getStatus_code());
 
 		if (!TextUtil.isEmpty(app_token)) {
@@ -84,7 +84,7 @@ public class FavoriteAction extends ActionSupport {
 	
 	@Action(value = "favo_match", results = { @Result(name = "success", type = "json", params = { "root", "result" }) })
 	public String getFavoMatch() throws Exception {
-		Response<Match> matchResponse = new Response<>();
+		Response<List<Match>> matchResponse = new Response<>();
 		matchResponse.setStatus_code(StatusCode.SUCCESS.getStatus_code());
 
 		if (!TextUtil.isEmpty(app_token)) {
@@ -109,7 +109,7 @@ public class FavoriteAction extends ActionSupport {
 	
 	@Action(value = "favo_discovery", results = { @Result(name = "success", type = "json", params = { "root", "result" }) })
 	public String getFavoDiscovery() throws Exception {
-		Response<Discovery> discoveryResponse = new Response<>();
+		Response<List<Discovery>> discoveryResponse = new Response<>();
 		discoveryResponse.setStatus_code(StatusCode.SUCCESS.getStatus_code());
 
 		if (!TextUtil.isEmpty(app_token)) {

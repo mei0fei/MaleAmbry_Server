@@ -43,7 +43,7 @@ public class DiscoveryAction extends ActionSupport{
 	public String execute() throws Exception {
 		List<Discovery> discoveryList = DBManager.getInstance().from("from Discovery").limit(page, 8).select();
 		
-		Response<Discovery> discoveryResponse = new Response<>();
+		Response<List<Discovery>> discoveryResponse = new Response<>();
 		if(discoveryList != null && discoveryList.size() > 0) {
 			discoveryResponse.setStatus_code(1000);
 			discoveryResponse.setResults(discoveryList);
@@ -65,18 +65,14 @@ public class DiscoveryAction extends ActionSupport{
 		List<RecommandsDiscovery> recommandDiscoveryList = DBManager.getInstance().from("from RecommandsDiscovery").select();
 		
 		Response<Discovery> discoveryResponse = new Response<>();
-		if(recommandDiscoveryList != null && recommandDiscoveryList.size() > 0) {
+		if(recommandDiscoveryList != null && recommandDiscoveryList.size() > 0 && page >= 0 && page < 2) {
 			discoveryResponse.setStatus_code(1000);
-			List<Discovery> discoveryList = new ArrayList<>();
-			for(int index = 0; index < recommandDiscoveryList.size(); index++) {
-				RecommandsDiscovery recommandsDiscovery = recommandDiscoveryList.get(index);
-				Discovery discovery = (Discovery) DBManager.getInstance().from("from Discovery").where("did = ?").addArguments(recommandsDiscovery.getDid()).select().get(0);
-				discoveryList.add(discovery);
-			}
-			discoveryResponse.setResults(discoveryList);
+			RecommandsDiscovery recommandsDiscovery = recommandDiscoveryList.get(page);
+			Discovery discovery = (Discovery) DBManager.getInstance().from("from Discovery").where("did = ?").addArguments(recommandsDiscovery.getDid()).select().get(0);
+			discoveryResponse.setResults(discovery);
 		} else {
 			discoveryResponse.setStatus_code(1001);
-			discoveryResponse.setResults(new ArrayList<>());
+			discoveryResponse.setResults(new Discovery());
 		}
 		
 

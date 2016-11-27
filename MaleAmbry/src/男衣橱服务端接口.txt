@@ -7,25 +7,29 @@
 返回数据：{"status_code":1000,"results":[{"id":1,"thumbnail":"banner1.png","target_url":"https://detail.tmall.com/item.htm?id\u003d539102502078"},{"id":2,"thumbnail":"banner2.png","target_url":"http://detail.tmall.com/item.htm?id\u003d531627522061"},{"id":3,"thumbnail":"banner3.png","target_url":"https://item.taobao.com/item.htm?ft\u003dt\u0026id\u003d526355007065"},{"id":4,"thumbnail":"banner4.png","target_url":"https://detail.tmall.com/item.htm?id\u003d540739166938"},{"id":5,"thumbnail":"banner5.png","target_url":"https://detail.tmall.com/item.htm?id\u003d539525863293"}]}
 
 2. 获取首页吸睛发现信息
---->主机名/recommand_discovery
-返回数据：{"status_code":1000,"results":[{"did":1,"title":"穿衣不对，怎么撩妹？","thumb_url":"http://nanyiku-v200.oss-cn-shenzhen.aliyuncs.com/product/16110314222201400258.jpg","viewed":40552,"detail_url":"http://console.nanyiku.net/app/schoolDetail.do?id\u003d930\u0026flag\u003dshare"},{"did":1,"title":"穿衣不对，怎么撩妹？","thumb_url":"http://nanyiku-v200.oss-cn-shenzhen.aliyuncs.com/product/16110314222201400258.jpg","viewed":40552,"detail_url":"http://console.nanyiku.net/app/schoolDetail.do?id\u003d930\u0026flag\u003dshare"}]}
+--->主机名/recommand_discovery?
+--->参数1：page=? 0<=page<2
+返回数据：{"status_code":1000,"results":{"did":19,"title":"能把这双皮鞋穿好的男人，走哪儿都让女生心动","thumb_url":"http://nanyiku-v200.oss-cn-shenzhen.aliyuncs.com/product/16103117035901700109.jpg","viewed":81146,"detail_url":"http://console.nanyiku.net/app/schoolDetail.do?id\u003d898\u0026flag\u003dshare"}}
 
 3. 获取首页潮流搭配信息
 --->主机名/recommand_match
+--->参数1：page=? 0<=page<2
+返回参数：{"status_code":1000,"results":{"mid":8,"type":1,"thumb_url":"http://nanyiku-v200.oss-cn-shenzhen.aliyuncs.com/product/16110218074201800122.jpg","title":"韩式时尚搭配","description":"羽绒服+高领毛衣+牛仔裤","thumb1":"https://img.alicdn.com/bao/uploaded/i2/TB1Gf06NVXXXXbYXpXXXXXXXXXX_!!0-item_pic.jpg_430x430q90.jpg","thumb2":"https://gd2.alicdn.com/imgextra/i1/2594671088/TB2PWQ1XbnA11Bjy0FjXXapoFXa_!!2594671088.jpg","thumb3":"https://img.alicdn.com/bao/uploaded/i3/TB1qT7KMVXXXXc3XpXXXXXXXXXX_!!0-item_pic.jpg_430x430q90.jpg"}}
 
-3. 获取首页今日精选第n页信息
-注：最多3页，即0-2.
-如：获取首页今日精选第2页信息
---->主机名/recommand_single?page=2
+3. 获取首页今日精选信息
+如：获取首页今日精选信息
+--->主机名/recommand_single
+返回参数：{"status_code":1000,"results":[{"sid":1,"type":101,"thumb_url":"https://gd1.alicdn.com/imgextra/i3/1706946819/TB287R.aM1J.eBjy0FaXXaXeVXa_!!1706946819.jpg_800x800.jpg","title":"冬季棉衣外套日系","price":188.0,"favorite_count":542,"target_url":"http://console.nanyiku.net/app/shareSingle.do?item_id\u003d354556"}]}
 
 4. 获取某种风格编号第n页单品信息
 如：上衣夹克风格编号为101，获取风格编号为101第2页单品信息
 --->主机名/single?style=101&page=2
+返回数据：{"status_code":1000,"results":[{"sid":17,"type":101,"thumb_url":"https://gd3.alicdn.com/imgextra/i2/TB1OeY8NFXXXXX5XVXXYXGcGpXX_M2.SS2_800x800.jpg","title":"港风加厚保暖棉衣","price":139.0,"favorite_count":541,"target_url":"http://console.nanyiku.net/app/shareSingle.do?item_id\u003d353768"}]}
 
 5. 获取某种风格编号第n页搭配信息
 如：休闲风格风格编号为1，获取风格编号为1第3页搭配信息
 --->主机名/match?style=1&page=3
-返回数据：{"status_code":1000,"results":[{"mid":20,"type":2,"thumb_url":"http://nanyiku-v200.oss-cn-shenzhen.aliyuncs.com/product/16102016301201605206.jpg","title":"商务西装搭配","description":"西装+西裤+皮鞋"},{"mid":21,"type":2,"thumb_url":"http://nanyiku-v200.oss-cn-shenzhen.aliyuncs.com/product/16101916155501604924.jpg","title":"西装外套日常穿搭","description":"西装外套+衬衫+休闲裤"}]}
+返回数据：{"status_code":1000,"results":[{"mid":1,"type":1,"thumb_url":"http://nanyiku-v200.oss-cn-shenzhen.aliyuncs.com/product/16110221110702100172.jpg","title":"冬季高冷搭配","description":"棉服+牛仔裤+马丁靴","thumb1":"https://gd4.alicdn.com/imgextra/i1/2562423560/TB2oi7rap15V1Bjy1XbXXaNcVXa_!!2562423560.jpg","thumb2":"https://gd4.alicdn.com/imgextra/i4/55139032/TB2ZPkKhFXXXXa8XpXXXXXXXXXX_!!55139032.jpg","thumb3":"https://img.alicdn.com/bao/uploaded/i1/TB1OHxQHXXXXXXBXXXXXXXXXXXX_!!0-item_pic.jpg_430x430q90.jpg"}]}
 
 6. 获取第n页发现信息
 如：获取第1页发现信息

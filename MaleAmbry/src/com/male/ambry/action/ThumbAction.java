@@ -54,7 +54,7 @@ public class ThumbAction extends ActionSupport{
 	public String getSingleThumb() throws Exception {
 		List<ThumbsSingle> thumbsSingle = DBManager.getInstance().from("from ThumbsSingle").where("sid = ?").addArguments(sid).select();
 		
-		Response<ThumbsSingle> thumbsSingleResponse = new Response<>();
+		Response<List<ThumbsSingle>> thumbsSingleResponse = new Response<>();
 		if(thumbsSingle != null && thumbsSingle.size() > 0) {
 			thumbsSingleResponse.setStatus_code(1000);
 			thumbsSingleResponse.setResults(thumbsSingle);
@@ -75,7 +75,7 @@ public class ThumbAction extends ActionSupport{
 	public String getMatchThumb() throws Exception {
 		List<ThumbsMatch> thumbsMatch = DBManager.getInstance().from("from ThumbsMatch").where("mid = ?").addArguments(mid).select();
 		
-		Response<ThumbsMatch> thumbsMatchResponse = new Response<>();
+		Response<List<ThumbsMatch>> thumbsMatchResponse = new Response<>();
 		if(thumbsMatch != null && thumbsMatch.size() > 0) {
 			thumbsMatchResponse.setStatus_code(1000);
 			thumbsMatchResponse.setResults(thumbsMatch);
