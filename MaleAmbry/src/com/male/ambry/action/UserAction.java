@@ -93,7 +93,7 @@ public class UserAction extends ActionSupport {
 		String method = ServletActionContext.getRequest().getMethod();
 
 		Response<List<User>> userResponse = new Response<>();
-		userResponse.setStatus_code(StatusCode.SUCCESS.ordinal());
+		userResponse.setStatus_code(StatusCode.SUCCESS.getStatus_code());
 
 		if (method.equals("POST") && !TextUtil.isEmpty(app_token) && !TextUtil.isEmpty(login_name) && !TextUtil.isEmpty(password)) {
 			User user = queryUser(login_name, password);
@@ -112,15 +112,15 @@ public class UserAction extends ActionSupport {
 					list.add(user);
 					userResponse.setResults(list);
 				} else { // ³ö´í
-					userResponse.setStatus_code(StatusCode.FAILURE.ordinal());
+					userResponse.setStatus_code(StatusCode.FAILURE.getStatus_code());
 					userResponse.setResults(new ArrayList<>());
 				}
 			} else {
-				userResponse.setStatus_code(StatusCode.FAILURE.ordinal());
+				userResponse.setStatus_code(StatusCode.FAILURE.getStatus_code());
 				userResponse.setResults(new ArrayList<>());
 			}
 		} else {
-			userResponse.setStatus_code(StatusCode.FAILURE.ordinal());
+			userResponse.setStatus_code(StatusCode.FAILURE.getStatus_code());
 			userResponse.setResults(new ArrayList<>());
 		}
 
@@ -135,8 +135,8 @@ public class UserAction extends ActionSupport {
 	public String register() throws Exception {
 		String method = ServletActionContext.getRequest().getMethod();
 
-		Response<List<User>> userResponse = new Response<>();
-		userResponse.setStatus_code(StatusCode.SUCCESS.ordinal());
+		Response<User> userResponse = new Response<>();
+		userResponse.setStatus_code(StatusCode.SUCCESS.getStatus_code());
 
 		if (method.equals("POST") && !TextUtil.isEmpty(login_name) && !TextUtil.isEmpty(password)
 				&& !TextUtil.isEmpty(phone)) {
@@ -145,16 +145,14 @@ public class UserAction extends ActionSupport {
 				user = createUser();
 				saveUser(user);
 
-				List<User> list = new ArrayList<>();
-				list.add(user);
-				userResponse.setResults(list);
+				userResponse.setResults(user);
 			} else {
-				userResponse.setStatus_code(StatusCode.FAILURE.ordinal());
-				userResponse.setResults(new ArrayList<>());
+				userResponse.setStatus_code(StatusCode.FAILURE.getStatus_code());
+				userResponse.setResults(new User());
 			}
 		} else {
-			userResponse.setStatus_code(StatusCode.FAILURE.ordinal());
-			userResponse.setResults(new ArrayList<>());
+			userResponse.setStatus_code(StatusCode.FAILURE.getStatus_code());
+			userResponse.setResults(new User());
 		}
 
 		Gson gson = new Gson();
@@ -169,18 +167,18 @@ public class UserAction extends ActionSupport {
 		String method = ServletActionContext.getRequest().getMethod();
 
 		Response<List<User>> userResponse = new Response<>();
-		userResponse.setStatus_code(StatusCode.SUCCESS.ordinal());
+		userResponse.setStatus_code(StatusCode.SUCCESS.getStatus_code());
 
 		if (method.equals("POST") && !TextUtil.isEmpty(app_token)) {
 			User user = queryAppToken(app_token);
 			if (user != null) {
 				userResponse.setResults(new ArrayList<>());
 			} else {
-				userResponse.setStatus_code(StatusCode.FAILURE.ordinal());
+				userResponse.setStatus_code(StatusCode.FAILURE.getStatus_code());
 				userResponse.setResults(new ArrayList<>());
 			}
 		} else {
-			userResponse.setStatus_code(StatusCode.FAILURE.ordinal());
+			userResponse.setStatus_code(StatusCode.FAILURE.getStatus_code());
 			userResponse.setResults(new ArrayList<>());
 		}
 
