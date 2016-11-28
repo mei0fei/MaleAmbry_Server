@@ -68,28 +68,39 @@
 --->参数1：phone=?
 --->参数2：new_psd=?
 
-12. 获取第n页单品收藏
+12. 修改用户信息
+--->主机名/modify_user_info
+--->Post参数1：app_token=?
+--->Post参数2：nick_name=?
+--->Post参数3：phone=?
+
+13. 获取第n页单品收藏
 注：app_token为32位服务器回传的app_token值
 --->主机名/favo_single
 --->参数1：app_token=?
 --->参数2：page=?
 
-13. 获取第n页搭配收藏
+14. 获取第n页搭配收藏
 注：app_token为32位服务器回传的app_token值
 --->主机名/favo_match
 --->参数1：app_token=?
 --->参数2：page=?
 
-14. 获取第n页发现收藏
+15. 获取第n页发现收藏
 注：app_token为32位服务器回传的app_token值
 --->主机名/favo_discovery
 --->参数1：app_token=?
 --->参数2：page=?
 
-15. 获取单品缩略图
+16. 获取单品缩略图
 --->主机名/thumb_single
 --->参数1：sid=?
 
-16. 获取搭配缩略图
+17. 获取搭配缩略图
 --->主机名/thumb_match
 --->参数1：mid=?
+
+18. 反馈意见
+--->主机名/feedback
+--->POST参数1：contact=?
+--->POST参数2：content=?

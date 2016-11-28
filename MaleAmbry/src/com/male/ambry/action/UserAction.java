@@ -31,6 +31,7 @@ public class UserAction extends ActionSupport {
 	private String phone;
 	private String old_psd;
 	private String new_psd;
+	private String nick_name;
 	
 	public String getResult() {
 		return result;
@@ -86,6 +87,14 @@ public class UserAction extends ActionSupport {
 
 	public void setNew_psd(String new_psd) {
 		this.new_psd = new_psd;
+	}
+
+	public String getNick_name() {
+		return nick_name;
+	}
+
+	public void setNick_name(String nick_name) {
+		this.nick_name = nick_name;
 	}
 
 	@Action(value = "login", results = { @Result(name = "success", type = "json", params = { "root", "result" }) })
@@ -189,7 +198,7 @@ public class UserAction extends ActionSupport {
 	public String modifyPassword() throws Exception {
 		String method = ServletActionContext.getRequest().getMethod();
 
-		Response<List<User>> userResponse = new Response<>();
+		Response<User> userResponse = new Response<>();
 		userResponse.setStatus_code(StatusCode.SUCCESS.getStatus_code());
 
 		if (method.equals("POST") && !TextUtil.isEmpty(app_token)  && !TextUtil.isEmpty(old_psd) && !TextUtil.isEmpty(new_psd) && !TextUtil.isEmpty(phone)) {
@@ -197,14 +206,14 @@ public class UserAction extends ActionSupport {
 			if (user != null && user.getPassword().equals(old_psd) && user.getPhone().equals(phone)) {
 				user.setPassword(new_psd);
 				updateUserInfo(user);
-				userResponse.setResults(new ArrayList<>());
+				userResponse.setResults(user);
 			} else {
 				userResponse.setStatus_code(StatusCode.FAILURE.getStatus_code());
-				userResponse.setResults(new ArrayList<>());
+				userResponse.setResults(new User());
 			}
 		} else {
 			userResponse.setStatus_code(StatusCode.FAILURE.getStatus_code());
-			userResponse.setResults(new ArrayList<>());
+			userResponse.setResults(new User());
 		}
 
 		Gson gson = new Gson();
@@ -223,6 +232,36 @@ public class UserAction extends ActionSupport {
 			User user = queryPhone(phone);
 			if (user != null) {
 				user.setPassword(new_psd);
+				updateUserInfo(user);
+				userResponse.setResults(user);
+			} else {
+				userResponse.setStatus_code(StatusCode.FAILURE.getStatus_code());
+				userResponse.setResults(new User());
+			}
+		} else {
+			userResponse.setStatus_code(StatusCode.FAILURE.getStatus_code());
+			userResponse.setResults(new User());
+		}
+
+		Gson gson = new Gson();
+		result = gson.toJson(userResponse);
+
+		ResponseUtil.outputResponse(ServletActionContext.getResponse(), result);
+		return SUCCESS;
+	}
+	
+	@Action(value = "modify_user_info", results = { @Result(name = "success", type = "json", params = { "root", "result" }) })
+	public String modifyUserInfo() throws Exception {
+		String method = ServletActionContext.getRequest().getMethod();
+		
+		Response<User> userResponse = new Response<>();
+		userResponse.setStatus_code(StatusCode.SUCCESS.getStatus_code());
+
+		if (method.equals("POST") && !TextUtil.isEmpty(app_token) && !TextUtil.isEmpty(nick_name) && !TextUtil.isEmpty(phone)) {
+			User user = queryAppToken(app_token);
+			if (user != null) {
+				user.setNick_name(nick_name);
+				user.setPhone(phone);
 				updateUserInfo(user);
 				userResponse.setResults(user);
 			} else {

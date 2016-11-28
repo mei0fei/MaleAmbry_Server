@@ -33,5 +33,10 @@
 	new_psd:<input type="text" name="new_psd"><br>
 	<input type="submit" value="忘记密码"><br>
 </form>
+<form action="feedback" method="post">
+	contact:<input type="text" name="contact"><br>
+	content:<input type="text" name="content"><br>
+	<input type="submit" value="反馈意见"><br>
+</form>
 </body>
 </html>

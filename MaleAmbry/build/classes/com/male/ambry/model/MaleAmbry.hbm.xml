@@ -151,4 +151,13 @@
 		<property name="thumbnail" column="thumbnail"/>
 		<property name="thumb_url" column="thumb_url"/>
 	</class>
+	
+	<!-- 反馈 -->
+	<class name="FeedBack" table="feedback">
+		<id name="id" column="id" type="java.lang.Long">
+			<generator class="increment" />
+		</id>
+		<property name="contact" column="contact"/>
+		<property name="content" column="content"/>
+	</class>
 </hibernate-mapping>
