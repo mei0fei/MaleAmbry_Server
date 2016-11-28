@@ -17,6 +17,7 @@ import com.male.ambry.model.Match;
 import com.male.ambry.model.Response;
 import com.male.ambry.model.Single;
 import com.male.ambry.model.StatusCode;
+import com.male.ambry.model.ThumbsMatch;
 import com.male.ambry.model.User;
 import com.male.ambry.utils.DBManager;
 import com.male.ambry.utils.ResponseUtil;
@@ -159,7 +160,6 @@ public class FavoriteAction extends ActionSupport {
 		List<FavoriteSingle> favoSingleList = DBManager.getInstance().from("from FavoriteSingle")
 				.where("uid = ?")
 				.addArguments(uid)
-				.limit(page, 8)
 				.select();
 		
 		if (favoSingleList != null && favoSingleList.size() > 0) {
@@ -193,11 +193,9 @@ public class FavoriteAction extends ActionSupport {
 		List<FavoriteMatch> favoMatchList = DBManager.getInstance().from("from FavoriteMatch")
 				.where("uid = ?")
 				.addArguments(uid)
-				.limit(page, 8)
 				.select();
 		
 		if (favoMatchList != null && favoMatchList.size() > 0) {
-			
 			for(int index = 0; index < favoMatchList.size(); index++) {
 				FavoriteMatch favoriteMatch = favoMatchList.get(index);
 				if(favoriteMatch != null ) {
@@ -207,7 +205,12 @@ public class FavoriteAction extends ActionSupport {
 							.select();
 				
 					if(matchList != null && matchList.size() > 0) {
-						matchs.add(matchList.get(0));
+						Match match = matchList.get(0);
+						List<ThumbsMatch> thumbsMatchList = DBManager.getInstance().from("from ThumbsMatch").where("mid = ?").addArguments(match.getMid()).select();
+						match.setThumb1(thumbsMatchList.get(0).getThumbnail());
+						match.setThumb2(thumbsMatchList.get(1).getThumbnail());
+						match.setThumb3(thumbsMatchList.get(2).getThumbnail());
+						matchs.add(match);
 					}
 				}
 			}
@@ -227,7 +230,6 @@ public class FavoriteAction extends ActionSupport {
 		List<FavoriteDiscovery> favoDiscoveryList = DBManager.getInstance().from("from FavoriteDiscovery")
 				.where("uid = ?")
 				.addArguments(uid)
-				.limit(page, 8)
 				.select();
 		
 		if (favoDiscoveryList != null && favoDiscoveryList.size() > 0) {

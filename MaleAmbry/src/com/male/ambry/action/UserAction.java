@@ -112,6 +112,7 @@ public class UserAction extends ActionSupport {
 
 					user.setApp_token(generateAppToken.getAppToken());
 					user.setTimestamp(generateAppToken.getTimestamp());
+					updateUserInfo(user);
 
 					userResponse.setResults(user);
 				} else if (app_token.equals(user.getApp_token())) { // 老用户旧客户端
