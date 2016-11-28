@@ -92,7 +92,7 @@ public class UserAction extends ActionSupport {
 	public String login() throws Exception {
 		String method = ServletActionContext.getRequest().getMethod();
 
-		Response<List<User>> userResponse = new Response<>();
+		Response<User> userResponse = new Response<>();
 		userResponse.setStatus_code(StatusCode.SUCCESS.getStatus_code());
 
 		if (method.equals("POST") && !TextUtil.isEmpty(app_token) && !TextUtil.isEmpty(login_name) && !TextUtil.isEmpty(password)) {
@@ -104,24 +104,20 @@ public class UserAction extends ActionSupport {
 					user.setApp_token(generateAppToken.getAppToken());
 					user.setTimestamp(generateAppToken.getTimestamp());
 
-					List<User> list = new ArrayList<>();
-					list.add(user);
-					userResponse.setResults(list);
+					userResponse.setResults(user);
 				} else if (app_token.equals(user.getApp_token())) { // 老用户旧客户端
-					List<User> list = new ArrayList<>();
-					list.add(user);
-					userResponse.setResults(list);
+					userResponse.setResults(user);
 				} else { // 出错
 					userResponse.setStatus_code(StatusCode.FAILURE.getStatus_code());
-					userResponse.setResults(new ArrayList<>());
+					userResponse.setResults(new User());
 				}
 			} else {
 				userResponse.setStatus_code(StatusCode.FAILURE.getStatus_code());
-				userResponse.setResults(new ArrayList<>());
+				userResponse.setResults(new User());
 			}
 		} else {
 			userResponse.setStatus_code(StatusCode.FAILURE.getStatus_code());
-			userResponse.setResults(new ArrayList<>());
+			userResponse.setResults(new User());
 		}
 
 		Gson gson = new Gson();
@@ -217,6 +213,33 @@ public class UserAction extends ActionSupport {
 		ResponseUtil.outputResponse(ServletActionContext.getResponse(), result);
 		return SUCCESS;
 	}
+	
+	@Action(value = "forgot_password", results = { @Result(name = "success", type = "json", params = { "root", "result" }) })
+	public String forgotPassword() throws Exception {
+		Response<User> userResponse = new Response<>();
+		userResponse.setStatus_code(StatusCode.SUCCESS.getStatus_code());
+
+		if (!TextUtil.isEmpty(phone) && !TextUtil.isEmpty(new_psd)) {
+			User user = queryPhone(phone);
+			if (user != null) {
+				user.setPassword(new_psd);
+				updateUserInfo(user);
+				userResponse.setResults(user);
+			} else {
+				userResponse.setStatus_code(StatusCode.FAILURE.getStatus_code());
+				userResponse.setResults(new User());
+			}
+		} else {
+			userResponse.setStatus_code(StatusCode.FAILURE.getStatus_code());
+			userResponse.setResults(new User());
+		}
+
+		Gson gson = new Gson();
+		result = gson.toJson(userResponse);
+
+		ResponseUtil.outputResponse(ServletActionContext.getResponse(), result);
+		return SUCCESS;
+	}
 
 	/**
 	 * 查询用户信息，通过账户密码匹配数据库中数据
@@ -281,5 +304,15 @@ public class UserAction extends ActionSupport {
 	
 	private void updateUserInfo(User user) {
 		DBManager.getInstance().update(user);
+	}
+	
+	private User queryPhone(String phone) {
+		User user = null;
+
+		List userList = DBManager.getInstance().from("from User").where("phone = ?").addArguments(phone).select();
+		if (userList != null && userList.size() > 0) {
+			user = (User) userList.get(0);
+		}
+		return user;
 	}
 }

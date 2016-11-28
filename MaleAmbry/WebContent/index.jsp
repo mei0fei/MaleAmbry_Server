@@ -28,6 +28,10 @@
 	phone:<input type="text" name="phone"><br>
 	<input type="submit" value="修改密码"><br>
 </form>
-
+<form action="forgot_password" method="get">
+	app_token:<input type="text" name="phone"><br>
+	new_psd:<input type="text" name="new_psd"><br>
+	<input type="submit" value="忘记密码"><br>
+</form>
 </body>
 </html>
