@@ -133,6 +133,84 @@ public class FavoriteAction extends ActionSupport {
 		return SUCCESS;
 	}
 	
+	@Action(value = "favo_sid", results = { @Result(name = "success", type = "json", params = { "root", "result" }) })
+	public String getFavoSid() throws Exception {
+		Response<List<FavoriteSingle>> singleResponse = new Response<>();
+		singleResponse.setStatus_code(StatusCode.SUCCESS.getStatus_code());
+
+		if (!TextUtil.isEmpty(app_token)) {
+			User user = queryAppToken(app_token);
+			if (user != null) {
+				List<FavoriteSingle> favoriteSingle = DBManager.getInstance().from("from FavoriteSingle").where("uid = ?").addArguments(user.getUid()).select();
+				singleResponse.setResults(favoriteSingle);
+			} else {
+				singleResponse.setStatus_code(StatusCode.FAILURE.getStatus_code());
+				singleResponse.setResults(new ArrayList<>());
+			}
+		} else {
+			singleResponse.setStatus_code(StatusCode.FAILURE.getStatus_code());
+			singleResponse.setResults(new ArrayList<>());
+		}
+
+		Gson gson = new Gson();
+		result = gson.toJson(singleResponse);
+
+		ResponseUtil.outputResponse(ServletActionContext.getResponse(), result);
+		return SUCCESS;
+	}
+	
+	@Action(value = "favo_mid", results = { @Result(name = "success", type = "json", params = { "root", "result" }) })
+	public String getFavoMid() throws Exception {
+		Response<List<FavoriteMatch>> matchResponse = new Response<>();
+		matchResponse.setStatus_code(StatusCode.SUCCESS.getStatus_code());
+
+		if (!TextUtil.isEmpty(app_token)) {
+			User user = queryAppToken(app_token);
+			if (user != null) {
+				List<FavoriteMatch> favoriteMatch = DBManager.getInstance().from("from FavoriteMatch").where("uid = ?").addArguments(user.getUid()).select();
+				matchResponse.setResults(favoriteMatch);
+			} else {
+				matchResponse.setStatus_code(StatusCode.FAILURE.getStatus_code());
+				matchResponse.setResults(new ArrayList<>());
+			}
+		} else {
+			matchResponse.setStatus_code(StatusCode.FAILURE.getStatus_code());
+			matchResponse.setResults(new ArrayList<>());
+		}
+
+		Gson gson = new Gson();
+		result = gson.toJson(matchResponse);
+
+		ResponseUtil.outputResponse(ServletActionContext.getResponse(), result);
+		return SUCCESS;
+	}
+	
+	@Action(value = "favo_did", results = { @Result(name = "success", type = "json", params = { "root", "result" }) })
+	public String getFavoDid() throws Exception {
+		Response<List<FavoriteDiscovery>> discoveryResponse = new Response<>();
+		discoveryResponse.setStatus_code(StatusCode.SUCCESS.getStatus_code());
+
+		if (!TextUtil.isEmpty(app_token)) {
+			User user = queryAppToken(app_token);
+			if (user != null) {
+				List<FavoriteDiscovery> favoriteDiscovery = DBManager.getInstance().from("from FavoriteDiscovery").where("uid = ?").addArguments(user.getUid()).select();
+				discoveryResponse.setResults(favoriteDiscovery);
+			} else {
+				discoveryResponse.setStatus_code(StatusCode.FAILURE.getStatus_code());
+				discoveryResponse.setResults(new ArrayList<>());
+			}
+		} else {
+			discoveryResponse.setStatus_code(StatusCode.FAILURE.getStatus_code());
+			discoveryResponse.setResults(new ArrayList<>());
+		}
+
+		Gson gson = new Gson();
+		result = gson.toJson(discoveryResponse);
+
+		ResponseUtil.outputResponse(ServletActionContext.getResponse(), result);
+		return SUCCESS;
+	}
+	
 	/**
 	 * 查询对应apptoken用户是否存在
 	 * @param apptoken

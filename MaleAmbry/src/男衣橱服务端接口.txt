@@ -92,15 +92,30 @@
 --->参数1：app_token=?
 --->参数2：page=?
 
-16. 获取单品缩略图
+16. 获取用户单品收藏列表id
+注：app_token为32位服务器回传的app_token值
+--->主机名/favo_sid
+--->参数1：app_token=?
+
+17. 获取用户搭配收藏列表id
+注：app_token为32位服务器回传的app_token值
+--->主机名/favo_mid
+--->参数1：app_token=?
+
+18. 获取用户发现收藏列表id
+注：app_token为32位服务器回传的app_token值
+--->主机名/favo_did
+--->参数1：app_token=?
+
+19. 获取单品缩略图
 --->主机名/thumb_single
 --->参数1：sid=?
 
-17. 获取搭配缩略图
+20. 获取搭配缩略图
 --->主机名/thumb_match
 --->参数1：mid=?
 
-18. 反馈意见
+21. 反馈意见
 --->主机名/feedback
 --->POST参数1：contact=?
 --->POST参数2：content=?

@@ -13,7 +13,7 @@ public class ThumbsMatch {
 	private long tmid;
 	private long mid;
 	private String thumbnail;
-	private transient String thumb_url;
+	private String thumb_url;
 	public long getTmid() {
 		return tmid;
 	}
