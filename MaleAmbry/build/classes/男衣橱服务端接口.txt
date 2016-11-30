@@ -107,15 +107,51 @@
 --->主机名/favo_did
 --->参数1：app_token=?
 
-19. 获取单品缩略图
+19. 添加单品收藏
+注：app_token为32位服务器回传的app_token值
+--->主机名/add_favo_sid
+--->参数1：app_token=?
+--->参数2：sid=?
+
+20. 添加搭配收藏
+注：app_token为32位服务器回传的app_token值
+--->主机名/add_favo_mid
+--->参数1：app_token=?
+--->参数2：mid=?
+
+21. 添加发现收藏
+注：app_token为32位服务器回传的app_token值
+--->主机名/add_favo_did
+--->参数1：app_token=?
+--->参数2：did=?
+
+22. 移除单品收藏
+注：app_token为32位服务器回传的app_token值
+--->主机名/remove_favo_sid
+--->参数1：app_token=?
+--->参数2：sid=?
+
+23. 移除搭配收藏
+注：app_token为32位服务器回传的app_token值
+--->主机名/remove_favo_mid
+--->参数1：app_token=?
+--->参数2：mid=?
+
+24. 移除发现收藏
+注：app_token为32位服务器回传的app_token值
+--->主机名/remove_favo_did
+--->参数1：app_token=?
+--->参数2：did=?
+
+25. 获取单品缩略图
 --->主机名/thumb_single
 --->参数1：sid=?
 
-20. 获取搭配缩略图
+26. 获取搭配缩略图
 --->主机名/thumb_match
 --->参数1：mid=?
 
-21. 反馈意见
+27. 反馈意见
 --->主机名/feedback
 --->POST参数1：contact=?
 --->POST参数2：content=?

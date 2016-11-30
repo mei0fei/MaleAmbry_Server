@@ -38,6 +38,9 @@ public class FavoriteAction extends ActionSupport {
 	private String result;
 	private String app_token;
 	private int page;
+	private long sid;
+	private long mid;
+	private long did;
 	
 	public String getResult() {
 		return result;
@@ -57,7 +60,24 @@ public class FavoriteAction extends ActionSupport {
 	public void setPage(int page) {
 		this.page = page;
 	}
-
+	public long getSid() {
+		return sid;
+	}
+	public void setSid(long sid) {
+		this.sid = sid;
+	}
+	public long getMid() {
+		return mid;
+	}
+	public void setMid(long mid) {
+		this.mid = mid;
+	}
+	public long getDid() {
+		return did;
+	}
+	public void setDid(long did) {
+		this.did = did;
+	}
 	@Action(value = "favo_single", results = { @Result(name = "success", type = "json", params = { "root", "result" }) })
 	public String getFavoSingle() throws Exception {
 		Response<List<Single>> singleResponse = new Response<>();
@@ -202,6 +222,177 @@ public class FavoriteAction extends ActionSupport {
 		} else {
 			discoveryResponse.setStatus_code(StatusCode.FAILURE.getStatus_code());
 			discoveryResponse.setResults(new ArrayList<>());
+		}
+
+		Gson gson = new Gson();
+		result = gson.toJson(discoveryResponse);
+
+		ResponseUtil.outputResponse(ServletActionContext.getResponse(), result);
+		return SUCCESS;
+	}
+	
+	@Action(value = "add_favo_sid", results = { @Result(name = "success", type = "json", params = { "root", "result" }) })
+	public String addFavoSid() throws Exception {
+		Response<String> discoveryResponse = new Response<>();
+		discoveryResponse.setStatus_code(StatusCode.SUCCESS.getStatus_code());
+
+		if (!TextUtil.isEmpty(app_token)) {
+			User user = queryAppToken(app_token);
+			if (user != null) {
+				FavoriteSingle favoriteSingle = new FavoriteSingle();
+				favoriteSingle.setSid(sid);
+				favoriteSingle.setUid(user.getUid());
+				DBManager.getInstance().executeUpdate(favoriteSingle);
+				discoveryResponse.setResults(" ’≤ÿ≥…π¶");
+			} else {
+				discoveryResponse.setStatus_code(StatusCode.FAILURE.getStatus_code());
+				discoveryResponse.setResults(" ’≤ÿ ß∞‹");
+			}
+		} else {
+			discoveryResponse.setStatus_code(StatusCode.FAILURE.getStatus_code());
+			discoveryResponse.setResults(" ’≤ÿ ß∞‹");
+		}
+
+		Gson gson = new Gson();
+		result = gson.toJson(discoveryResponse);
+
+		ResponseUtil.outputResponse(ServletActionContext.getResponse(), result);
+		return SUCCESS;
+	}
+	
+	@Action(value = "add_favo_mid", results = { @Result(name = "success", type = "json", params = { "root", "result" }) })
+	public String addFavoMid() throws Exception {
+		Response<String> discoveryResponse = new Response<>();
+		discoveryResponse.setStatus_code(StatusCode.SUCCESS.getStatus_code());
+
+		if (!TextUtil.isEmpty(app_token)) {
+			User user = queryAppToken(app_token);
+			if (user != null) {
+				FavoriteMatch favoriteMatch = new FavoriteMatch();
+				favoriteMatch.setMid(mid);
+				favoriteMatch.setUid(user.getUid());
+				DBManager.getInstance().executeUpdate(favoriteMatch);
+				discoveryResponse.setResults(" ’≤ÿ≥…π¶");
+			} else {
+				discoveryResponse.setStatus_code(StatusCode.FAILURE.getStatus_code());
+				discoveryResponse.setResults(" ’≤ÿ ß∞‹");
+			}
+		} else {
+			discoveryResponse.setStatus_code(StatusCode.FAILURE.getStatus_code());
+			discoveryResponse.setResults(" ’≤ÿ ß∞‹");
+		}
+
+		Gson gson = new Gson();
+		result = gson.toJson(discoveryResponse);
+
+		ResponseUtil.outputResponse(ServletActionContext.getResponse(), result);
+		return SUCCESS;
+	}
+	
+	@Action(value = "add_favo_did", results = { @Result(name = "success", type = "json", params = { "root", "result" }) })
+	public String addFavoDid() throws Exception {
+		Response<String> discoveryResponse = new Response<>();
+		discoveryResponse.setStatus_code(StatusCode.SUCCESS.getStatus_code());
+
+		if (!TextUtil.isEmpty(app_token)) {
+			User user = queryAppToken(app_token);
+			if (user != null) {
+				FavoriteDiscovery favoriteDiscovery = new FavoriteDiscovery();
+				favoriteDiscovery.setDid(did);
+				favoriteDiscovery.setUid(user.getUid());
+				DBManager.getInstance().executeUpdate(favoriteDiscovery);
+				discoveryResponse.setResults(" ’≤ÿ≥…π¶");
+			} else {
+				discoveryResponse.setStatus_code(StatusCode.FAILURE.getStatus_code());
+				discoveryResponse.setResults(" ’≤ÿ ß∞‹");
+			}
+		} else {
+			discoveryResponse.setStatus_code(StatusCode.FAILURE.getStatus_code());
+			discoveryResponse.setResults(" ’≤ÿ ß∞‹");
+		}
+
+		Gson gson = new Gson();
+		result = gson.toJson(discoveryResponse);
+
+		ResponseUtil.outputResponse(ServletActionContext.getResponse(), result);
+		return SUCCESS;
+	}
+	
+	@Action(value = "remove_favo_sid", results = { @Result(name = "success", type = "json", params = { "root", "result" }) })
+	public String removeFavoSid() throws Exception {
+		Response<String> discoveryResponse = new Response<>();
+		discoveryResponse.setStatus_code(StatusCode.SUCCESS.getStatus_code());
+
+		if (!TextUtil.isEmpty(app_token)) {
+			User user = queryAppToken(app_token);
+			if (user != null) {
+				List<FavoriteSingle> list = DBManager.getInstance().from("from FavoriteSingle").where("sid = ? and uid = ?").addArguments(sid, user.getUid()).select();
+				FavoriteSingle favoriteSingle = list.get(0);
+				DBManager.getInstance().executeDelete(favoriteSingle);
+				discoveryResponse.setResults("“∆≥˝ ’≤ÿ≥…π¶");
+			} else {
+				discoveryResponse.setStatus_code(StatusCode.FAILURE.getStatus_code());
+				discoveryResponse.setResults("“∆≥˝ ’≤ÿ ß∞‹");
+			}
+		} else {
+			discoveryResponse.setStatus_code(StatusCode.FAILURE.getStatus_code());
+			discoveryResponse.setResults("“∆≥˝ ’≤ÿ ß∞‹");
+		}
+
+		Gson gson = new Gson();
+		result = gson.toJson(discoveryResponse);
+
+		ResponseUtil.outputResponse(ServletActionContext.getResponse(), result);
+		return SUCCESS;
+	}
+	
+	@Action(value = "remove_favo_mid", results = { @Result(name = "success", type = "json", params = { "root", "result" }) })
+	public String removeFavoMid() throws Exception {
+		Response<String> discoveryResponse = new Response<>();
+		discoveryResponse.setStatus_code(StatusCode.SUCCESS.getStatus_code());
+
+		if (!TextUtil.isEmpty(app_token)) {
+			User user = queryAppToken(app_token);
+			if (user != null) {
+				List<FavoriteMatch> list = DBManager.getInstance().from("from FavoriteMatch").where("mid = ? and uid = ?").addArguments(mid, user.getUid()).select();
+				FavoriteMatch favoriteMatch = list.get(0);
+				DBManager.getInstance().executeDelete(favoriteMatch);
+				discoveryResponse.setResults("“∆≥˝ ’≤ÿ≥…π¶");
+			} else {
+				discoveryResponse.setStatus_code(StatusCode.FAILURE.getStatus_code());
+				discoveryResponse.setResults("“∆≥˝ ’≤ÿ ß∞‹");
+			}
+		} else {
+			discoveryResponse.setStatus_code(StatusCode.FAILURE.getStatus_code());
+			discoveryResponse.setResults("“∆≥˝ ’≤ÿ ß∞‹");
+		}
+
+		Gson gson = new Gson();
+		result = gson.toJson(discoveryResponse);
+
+		ResponseUtil.outputResponse(ServletActionContext.getResponse(), result);
+		return SUCCESS;
+	}
+	
+	@Action(value = "remove_favo_did", results = { @Result(name = "success", type = "json", params = { "root", "result" }) })
+	public String removeFavoDid() throws Exception {
+		Response<String> discoveryResponse = new Response<>();
+		discoveryResponse.setStatus_code(StatusCode.SUCCESS.getStatus_code());
+
+		if (!TextUtil.isEmpty(app_token)) {
+			User user = queryAppToken(app_token);
+			if (user != null) {
+				List<FavoriteDiscovery> list = DBManager.getInstance().from("from FavoriteDiscovery").where("did = ? and uid = ?").addArguments(did, user.getUid()).select();
+				FavoriteDiscovery favoriteDiscovery = list.get(0);
+				DBManager.getInstance().executeDelete(favoriteDiscovery);
+				discoveryResponse.setResults("“∆≥˝ ’≤ÿ≥…π¶");
+			} else {
+				discoveryResponse.setStatus_code(StatusCode.FAILURE.getStatus_code());
+				discoveryResponse.setResults("“∆≥˝ ’≤ÿ ß∞‹");
+			}
+		} else {
+			discoveryResponse.setStatus_code(StatusCode.FAILURE.getStatus_code());
+			discoveryResponse.setResults("“∆≥˝ ’≤ÿ ß∞‹");
 		}
 
 		Gson gson = new Gson();
