@@ -12,6 +12,7 @@ import com.google.gson.Gson;
 import com.male.ambry.model.RecommandsSingle;
 import com.male.ambry.model.Response;
 import com.male.ambry.model.Single;
+import com.male.ambry.utils.ConCurrentcyQueryUtil;
 import com.male.ambry.utils.DBManager;
 import com.male.ambry.utils.ResponseUtil;
 import com.opensymphony.xwork2.ActionSupport;
@@ -70,7 +71,8 @@ public class SingleAction extends ActionSupport {
 	
 	@Action(value="recommand_single", results={@Result(name="success", type="json", params={"root", "result"})})
 	public String recommandsMatch() throws Exception {
-		List<RecommandsSingle> recommandSingleList = DBManager.getInstance().from("from RecommandsSingle").select();
+//		List<RecommandsSingle> recommandSingleList = DBManager.getInstance().from("from RecommandsSingle").select();
+		List<RecommandsSingle> recommandSingleList = ConCurrentcyQueryUtil.queryRecommandSingle();
 		
 		Response<List<Single>> singleResponse = new Response<>();
 		if(recommandSingleList != null && recommandSingleList.size() > 0) {
@@ -78,7 +80,8 @@ public class SingleAction extends ActionSupport {
 			List<Single> singleList = new ArrayList<>();
 			for(int index = 0; index < recommandSingleList.size(); index++) {
 				RecommandsSingle recommandsSingle= recommandSingleList.get(index);
-				Single single = (Single) DBManager.getInstance().from("from Single").where("sid = ?").addArguments(recommandsSingle.getSid()).select().get(0);
+//				Single single = (Single) DBManager.getInstance().from("from Single").where("sid = ?").addArguments(recommandsSingle.getSid()).select().get(0);
+				Single single = (Single) ConCurrentcyQueryUtil.querySingle(recommandsSingle.getSid()).get(0);
 				singleList.add(single);
 			}
 			singleResponse.setResults(singleList);

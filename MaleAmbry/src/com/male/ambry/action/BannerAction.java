@@ -11,6 +11,7 @@ import org.apache.struts2.convention.annotation.Result;
 import com.google.gson.Gson;
 import com.male.ambry.model.Banner;
 import com.male.ambry.model.Response;
+import com.male.ambry.utils.ConCurrentcyQueryUtil;
 import com.male.ambry.utils.DBManager;
 import com.male.ambry.utils.ResponseUtil;
 import com.opensymphony.xwork2.ActionSupport;
@@ -35,7 +36,8 @@ public class BannerAction extends ActionSupport{
 	@Override
 	@Action(value="banner", results={@Result(name="success", type="json", params={"root", "result"})})
 	public String execute() throws Exception {
-		List<Banner> bannerList = DBManager.getInstance().from("from Banner").select();
+//		List<Banner> bannerList = DBManager.getInstance().from("from Banner").select();
+		List<Banner> bannerList = ConCurrentcyQueryUtil.queryBanner();
 		
 		Response<List<Banner>> bannerResponse = new Response<>();
 		if(bannerList != null && bannerList.size() > 0) {

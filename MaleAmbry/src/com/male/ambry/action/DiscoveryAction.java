@@ -12,6 +12,7 @@ import com.google.gson.Gson;
 import com.male.ambry.model.Discovery;
 import com.male.ambry.model.RecommandsDiscovery;
 import com.male.ambry.model.Response;
+import com.male.ambry.utils.ConCurrentcyQueryUtil;
 import com.male.ambry.utils.DBManager;
 import com.male.ambry.utils.ResponseUtil;
 import com.opensymphony.xwork2.ActionSupport;
@@ -62,13 +63,15 @@ public class DiscoveryAction extends ActionSupport{
 	
 	@Action(value="recommand_discovery", results={@Result(name="success", type="json", params={"root", "result"})})
 	public String recommandsDiscovery() throws Exception {
-		List<RecommandsDiscovery> recommandDiscoveryList = DBManager.getInstance().from("from RecommandsDiscovery").select();
+//		List<RecommandsDiscovery> recommandDiscoveryList = DBManager.getInstance().from("from RecommandsDiscovery").select();
+		List<RecommandsDiscovery> recommandDiscoveryList = ConCurrentcyQueryUtil.queryRecommandDiscovery();
 		
 		Response<Discovery> discoveryResponse = new Response<>();
 		if(recommandDiscoveryList != null && recommandDiscoveryList.size() > 0 && page >= 0 && page < 2) {
 			discoveryResponse.setStatus_code(1000);
 			RecommandsDiscovery recommandsDiscovery = recommandDiscoveryList.get(page);
-			Discovery discovery = (Discovery) DBManager.getInstance().from("from Discovery").where("did = ?").addArguments(recommandsDiscovery.getDid()).select().get(0);
+//			Discovery discovery = (Discovery) DBManager.getInstance().from("from Discovery").where("did = ?").addArguments(recommandsDiscovery.getDid()).select().get(0);
+			Discovery discovery = (Discovery) ConCurrentcyQueryUtil.queryDiscovery(recommandsDiscovery.getDid()).get(0);
 			discoveryResponse.setResults(discovery);
 		} else {
 			discoveryResponse.setStatus_code(1001);

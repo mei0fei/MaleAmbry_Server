@@ -410,9 +410,9 @@ public class FavoriteAction extends ActionSupport {
 	private User queryAppToken(String apptoken) {
 		User user = null;
 
-		List userList = DBManager.getInstance().from("from User").where("app_token = ?").addArguments(apptoken).select();
+		List<User> userList = DBManager.getInstance().from("from User").where("app_token = ?").addArguments(apptoken).select();
 		if (userList != null && userList.size() > 0) {
-			user = (User) userList.get(0);
+			user = userList.get(0);
 		}
 		return user;
 	}

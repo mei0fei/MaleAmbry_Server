@@ -20,6 +20,7 @@ import org.hibernate.query.Query;
  **/
 public class DBManager<T> {
 	private static DBManager mInstance = null;
+	private Object obj = new Object();
 	private SessionFactory mSessionFactory = null;
 	private Session mSession = null;
 	private Query mQuery = null;
@@ -167,12 +168,15 @@ public class DBManager<T> {
 	 * @return
 	 */
 	public synchronized List<T> select() {
-		if(mQuery == null) {
-			startSession();
-			mQuery = mSession.createQuery(hql);
+		List<T> list = null;
+		synchronized(obj) {
+			if(mQuery == null) {
+				startSession();
+				mQuery = mSession.createQuery(hql);
+			}
+			list = mQuery.list();
+			endSession();
 		}
-		List<T> list = mQuery.list();
-		endSession();
 		return list;
 	}
 	
