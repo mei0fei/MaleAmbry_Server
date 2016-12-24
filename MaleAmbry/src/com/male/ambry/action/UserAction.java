@@ -146,7 +146,7 @@ public class UserAction extends ActionSupport {
 
 		if (method.equals("POST") && !TextUtil.isEmpty(login_name) && !TextUtil.isEmpty(password)
 				&& !TextUtil.isEmpty(phone)) {
-			User user = queryUser(login_name, password);
+			User user = queryUser(login_name);
 			if (user == null) {
 				user = createUser();
 				saveUser(user);
@@ -161,6 +161,8 @@ public class UserAction extends ActionSupport {
 			userResponse.setResults(new User());
 		}
 
+		System.out.println("status_code----->" + userResponse.getStatus_code());
+		System.out.println("info----->" + userResponse.getResults());
 		Gson gson = new Gson();
 		result = gson.toJson(userResponse);
 
@@ -201,7 +203,6 @@ public class UserAction extends ActionSupport {
 
 		Response<User> userResponse = new Response<>();
 		userResponse.setStatus_code(StatusCode.SUCCESS.getStatus_code());
-
 		if (method.equals("POST") && !TextUtil.isEmpty(app_token)  && !TextUtil.isEmpty(old_psd) && !TextUtil.isEmpty(new_psd) && !TextUtil.isEmpty(phone)) {
 			User user = queryAppToken(app_token);
 			if (user != null && user.getPassword().equals(old_psd) && user.getPhone().equals(phone)) {
@@ -217,6 +218,7 @@ public class UserAction extends ActionSupport {
 			userResponse.setResults(new User());
 		}
 
+		User results = userResponse.getResults();
 		Gson gson = new Gson();
 		result = gson.toJson(userResponse);
 
@@ -293,6 +295,23 @@ public class UserAction extends ActionSupport {
 
 		List userList = DBManager.getInstance().from("from User").where("login_name = ? and password = ?")
 				.addArguments(username, password).select();
+		if (userList != null && userList.size() > 0) {
+			user = (User) userList.get(0);
+		}
+		return user;
+	}
+	
+	/**
+	 * 查询用户信息，通过账户匹配数据库中数据
+	 * 
+	 * @param loginName
+	 * @return
+	 */
+	private User queryUser(String loginName) {
+		User user = null;
+
+		List userList = DBManager.getInstance().from("from User").where("login_name = ?")
+				.addArguments(loginName).select();
 		if (userList != null && userList.size() > 0) {
 			user = (User) userList.get(0);
 		}
